@@ -1,12 +1,38 @@
 {
-  "$schema": "https://opencode.ai/config.json",
-  "provider": {
-    "openai": {
-      "name": "OmniRoute",
-      "base_url": "http://localhost:20128/v1",
-      "api_key": "omniroute-key"
+    "$schema": "https://opencode.ai/config.json",
+    "instructions": [
+        "AGENTS.md",
+        ".context/CONVENTIONS.md"
+    ],
+    "mcp": {
+        "context7": {
+            "type": "local",
+            "command": [
+                "npx",
+                "-y",
+                "@upstash/context7-mcp"
+            ],
+            "enabled": true
+        }
+    },
+    "agent": {
+        "plan": {
+            "model": "omniroute/app-architect",
+            "permission": {
+                "edit": "deny",
+                "bash": "deny"
+            }
+        },
+        "build": {
+            "model": "omniroute/app-architect"
+        },
+        "explore": {
+            "model": "omniroute/fast-builder",
+            "permission": {
+                "context7*": "deny",
+                "edit": "deny",
+                "bash": "deny"
+            }
+        }
     }
-  },
-  "model": "openai/gpt-4o",
-  "small_model": "openai/gpt-4o-mini"
 }
